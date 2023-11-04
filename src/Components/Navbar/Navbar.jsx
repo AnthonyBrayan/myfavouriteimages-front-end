@@ -30,8 +30,8 @@ function ColorSchemesExample() {
             />
           </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/">My gallery</Nav.Link>
-            <Nav.Link href="/addimage">Add image</Nav.Link>
+            <Nav.Link href="/" className="fs-5">My gallery</Nav.Link>
+            <Nav.Link href="/addimage" className="fs-5">Add image</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
