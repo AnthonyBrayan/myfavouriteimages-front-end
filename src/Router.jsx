@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./Views/Home.jsx";
+import Home from "./Views/Home/Home.jsx";
 import Navbar from "./Components/Navbar/Navbar.jsx";
-import Category from "./Views/AddImage.jsx";
+import AddImage from "./Views/AddImage/AddImage.jsx";
 
 
 const Router = () => {
@@ -10,7 +10,7 @@ const Router = () => {
 <Navbar />
 <Routes>
      <Route path="/" element={<Home />} />
-     <Route path="/addimage" element={<Category />} />
+     <Route path="/addimage" element={<AddImage />} />
    </Routes>
 </>
  );

@@ -1,0 +1,29 @@
+{
+    "image": [
+      {
+        "título": "Futbol",
+        "Image": "https://res.cloudinary.com/dipahj9kx/image/upload/v1699212059/Images/Sports/wigvp0hjcb9qfbphpabm.png",
+        "id": 1
+      },
+      {
+        "título": "Voleibol",
+        "Image": "https://res.cloudinary.com/dipahj9kx/image/upload/v1699212059/Images/Sports/cxusyoffsp7hnk8zn3nq.png",
+        "id": 2
+      },
+      {
+        "título": "Natación",
+        "Image": "https://res.cloudinary.com/dipahj9kx/image/upload/v1699212059/Images/Sports/jttocii21x4kfmzi5pux.png",
+        "id": 3
+      },
+      {
+        "título": "Golf",
+        "Image": "https://res.cloudinary.com/dipahj9kx/image/upload/v1699212059/Images/Sports/x1tqfltwdbv7t7nw1bdx.png",
+        "id": 4
+      },
+      {
+        "título": "Baskeball",
+        "Image": "https://res.cloudinary.com/dipahj9kx/image/upload/v1699212059/Images/Sports/zvoctudmav2cbugv7ehl.png",
+        "id": 5
+      }
+    ]
+ }
