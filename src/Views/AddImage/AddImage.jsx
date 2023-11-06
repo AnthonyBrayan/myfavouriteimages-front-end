@@ -4,7 +4,8 @@ import "../AddImage/AddImage.css";
 function AddImage() {
   const [Image, setImage] = useState(null);
   const [titulo, setTitulo] = useState("");
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState([]); 
+  const inputFileRef = React.useRef();
 
   useEffect(() => {
     fetch("../../CardImage.json")
@@ -50,11 +51,33 @@ function AddImage() {
         ...prevImages,
         { id: data.id, titulo: titulo, Image: Image },
       ]);
+      setImage(null);
+      setTitulo("");
+      inputFileRef.current.value = null;
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
+  const handleDelete = async (id) => {
+    if (
+      window.confirm("¿Estás seguro de que quieres eliminar este elemento?")
+    ) {
+      try {
+        const response = await fetch(`http://localhost:3000/image/${id}`, {
+          method: "DELETE",
+        });
+
+        if (!response.ok) {
+          throw new Error("Error al eliminar el elemento");
+        }
+        setImages(images.filter((item) => item.id !== id));
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  };
+    
   return (
     <div>
       <div className="new-form-container">
@@ -68,6 +91,7 @@ function AddImage() {
           />
           <input
             type="file"
+            ref={inputFileRef}
             onChange={handleImageUpload}
             className="new-form-control"
           />
@@ -95,7 +119,11 @@ function AddImage() {
                 />
                 <span>Edit</span>
               </button>
-              <button className="delete-btn">
+              
+              <button
+                className="delete-btn"
+                onClick={() => handleDelete(item.id)}
+              >
                 <img
                   src="https://res.cloudinary.com/dipahj9kx/image/upload/v1699270532/Images/Icon/pvwelwgkwofcons9epfw.png"
                   alt="Icon delete image"

@@ -7,7 +7,7 @@ function Home() {
   useEffect(() => {
     fetch("../../CardImage.json")
       .then((response) => response.json())
-      .then((data) => setData(data.image)); // Aquí estamos obteniendo solo la lista de objetos "image"
+      .then((data) => setData(data.image)); 
   }, []);
 
   return (
