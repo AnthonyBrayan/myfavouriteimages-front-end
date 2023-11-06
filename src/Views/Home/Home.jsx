@@ -14,8 +14,8 @@ function Home() {
     <div className="card-container">
       {data && data.map((item, index) => (
         <div key={index} className="card">
-          <h1 className="card-title">{item.título}</h1>
-          <img className="card-image" src={item.Image} alt={item.título} />
+          <h1 className="card-title">{item.titulo}</h1>
+          <img className="card-image" src={item.Image} alt={item.titulo} />
         </div>
       ))}
     </div>

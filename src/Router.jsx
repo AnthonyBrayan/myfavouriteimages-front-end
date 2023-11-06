@@ -5,6 +5,7 @@ import AddImage from "./Views/AddImage/AddImage.jsx";
 
 
 const Router = () => {
+
  return (    
 <>
 <Navbar />
