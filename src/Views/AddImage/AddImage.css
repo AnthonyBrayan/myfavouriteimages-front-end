@@ -20,6 +20,9 @@
    }
    
    .new-btn-dark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -32,6 +35,15 @@
    .new-btn-dark:hover {
     background-color: #555;
    }
+
+   .new-btn-dark img {
+    width: 30px;
+    margin-right: 10px;
+  }
+  
+  .new-btn-dark span {
+    margin-left: 10px;
+  }
    
    .new-image {
     width: 100%;
