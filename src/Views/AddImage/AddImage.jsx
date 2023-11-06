@@ -71,10 +71,10 @@ function AddImage() {
             onChange={handleImageUpload}
             className="new-form-control"
           />
-          <button type="submit" className="new-btn-dark">
+          <button type="submit" className="add">
             <img
               src="https://res.cloudinary.com/dipahj9kx/image/upload/v1699270532/Images/Icon/bqnumllslwvfhatihdxc.png"
-              alt="Icon"
+              alt="Icon Add image"
             />
             <span>Add Image</span>
           </button>
@@ -87,8 +87,22 @@ function AddImage() {
           <div key={item.id} className="card">
             <h1 className="card-title">{item.titulo}</h1>
             <img className="card-image" src={item.Image} alt={item.titulo} />
-            <button className="edit-btn">Edit</button>
-            <button className="delete-btn">Delete</button>
+            <div className="buttonEditDelete">
+              <button className="edit-btn">
+                <img
+                  src="https://res.cloudinary.com/dipahj9kx/image/upload/v1699270532/Images/Icon/pfzo4kvd53g3iigmzeqi.png"
+                  alt="Icon Edit image"
+                />
+                <span>Edit</span>
+              </button>
+              <button className="delete-btn">
+                <img
+                  src="https://res.cloudinary.com/dipahj9kx/image/upload/v1699270532/Images/Icon/pvwelwgkwofcons9epfw.png"
+                  alt="Icon delete image"
+                />
+                <span>Delete</span>
+              </button>
+            </div>
           </div>
         ))}
       </div>
