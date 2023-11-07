@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../AddImage/AddImage.css";
 
 function AddImage() {
@@ -8,18 +8,7 @@ function AddImage() {
   // const inputFileRef = React.useRef();
   const [editingItem, setEditingItem] = useState(null);
 
-  useEffect(() => {
-
-    fetch("https://localhost:7093/Image/Get")
-      .then((response) => response.json())
-      .then((data) => {
-
-        setImages(data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los datos de las imágenes:", error);
-      });
-  }, []);
+  loadData();
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -36,44 +25,6 @@ function AddImage() {
     setTitulo(event.target.value);
   };
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   if (!title || !imageFavourite) {
-  //     alert("Please, Enter the title and image.");
-  //     return;
-  //   }
-
-  //   const requestOptions = {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ title: title, imageFavourite: imageFavourite }),
-  //   };
-
-  //   try {
-  //     const response = await fetch(
-  //       "https://localhost:7093/Image/Post",
-  //       requestOptions
-  //     );
-  //     const data = await response.json();
-  //     setImages((prevImages) => {
-  //       if (Array.isArray(prevImages)) {
-  //         return [...prevImages, { id: data.id, title: title, imageFavourite: imageFavourite }];
-  //       } else {
-  //         // Si prevImages no es una matriz, inicializa una nueva matriz con el nuevo elemento.
-  //         return [{ id: data.id, title: title, imageFavourite: imageFavourite }];
-  //       }
-  //     });
-
-  //     alert("Image added successfully.");
-      
-  //     setImage(null);
-  //     setTitulo("");
-  //     // inputFileRef.current.value = null;
-  
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!title || !imageFavourite) {
@@ -97,13 +48,6 @@ function AddImage() {
       }
       const data = await response.json();
    
-      // setImages((prevImages) => {
-      //   if (Array.isArray(prevImages)) {
-      //     return [...prevImages, { id: data.id, title: title, imageFavourite: imageFavourite }];
-      //   } else {
-      //     return [{ id: data.id, title: title, imageFavourite: imageFavourite }];
-      //   }
-      // });
       setImages((prevImages) => {
         return [...prevImages, { id: data.id, title: title, imageFavourite: imageFavourite }];
       });
@@ -116,12 +60,25 @@ function AddImage() {
       console.error("Error:", error);
     }
   };
+
+  async function loadData() {
+    try {
+      const response = await fetch("https://localhost:7093/Image/Get");
+      if (!response.ok) {
+        throw new Error("Error al obtener los datos de las imágenes.");
+      }
+      const data = await response.json();
+      setImages(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
   
 
   const handleEdit = (item) => {
     setEditingItem(item);
-    setTitulo(item.titulo);
-    setImage(item.Image);
+    setTitulo(item.title);
+    setImage(item.imageFavourite);
   };
 
   const handleEditImageUpload = (event) => {
@@ -129,20 +86,20 @@ function AddImage() {
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      setEditingItem({ ...editingItem, Image: reader.result });
+      setEditingItem({ ...editingItem, imageFavourite: reader.result });
     };
 
     reader.readAsDataURL(file);
   };
 
   const handleEditTitleChange = (event) => {
-    setEditingItem({ ...editingItem, titulo: event.target.value });
+    setEditingItem({ ...editingItem, title: event.target.value });
   };
 
   const handleEditSubmit = async (event) => {
     event.preventDefault();
     
-    if (!editingItem.titulo.trim()) {
+    if (!editingItem.title.trim()) {
       alert("Please, Enter the title.");
       return;
     }
@@ -155,7 +112,7 @@ function AddImage() {
 
       try {
         const response = await fetch(
-          `http://localhost:3000/image/${editingItem.id}`,
+          `https://localhost:7093/Image/Put/${editingItem.id}`,
           requestOptions
         );
 
@@ -170,6 +127,8 @@ function AddImage() {
         setTitulo("");
         setEditingItem(null);
         setImage("");
+
+        loadData();
       } catch (error) {
         console.error("Error:", error);
       }
@@ -206,7 +165,7 @@ function AddImage() {
         >
           <input
             type="text"
-            value={editingItem ? editingItem.titulo : title}
+            value={editingItem ? editingItem.title : title}
             onChange={editingItem ? handleEditTitleChange : handleTitleChange}
             placeholder="Enter the title."
             className="new-form-control"
@@ -226,7 +185,7 @@ function AddImage() {
           </button>
         </form>
 
-        {editingItem ? <img src={editingItem.Image} alt="" className="new-image" /> : <img src={imageFavourite} alt="" className="new-image" style={{ display: imageFavourite ? 'block' : 'none' }} />}
+        {editingItem ? <img src={editingItem.imageFavourite} alt="" className="new-image" /> : <img src={imageFavourite} alt="" className="new-image" style={{ display: imageFavourite ? 'block' : 'none' }} />}
 
 
       </div>
