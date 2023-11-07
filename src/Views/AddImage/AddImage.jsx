@@ -183,7 +183,7 @@ function AddImage() {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to remove this item?")) {
       try {
-        const response = await fetch(`http://localhost:3000/image/${id}`, {
+        const response = await fetch(`https://localhost:7093/Image/Delete/${id}`, {
           method: "DELETE",
         });
 
