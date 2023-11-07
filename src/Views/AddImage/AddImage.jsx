@@ -36,44 +36,87 @@ function AddImage() {
     setTitulo(event.target.value);
   };
 
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   if (!title || !imageFavourite) {
+  //     alert("Please, Enter the title and image.");
+  //     return;
+  //   }
+
+  //   const requestOptions = {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ title: title, imageFavourite: imageFavourite }),
+  //   };
+
+  //   try {
+  //     const response = await fetch(
+  //       "https://localhost:7093/Image/Post",
+  //       requestOptions
+  //     );
+  //     const data = await response.json();
+  //     setImages((prevImages) => {
+  //       if (Array.isArray(prevImages)) {
+  //         return [...prevImages, { id: data.id, title: title, imageFavourite: imageFavourite }];
+  //       } else {
+  //         // Si prevImages no es una matriz, inicializa una nueva matriz con el nuevo elemento.
+  //         return [{ id: data.id, title: title, imageFavourite: imageFavourite }];
+  //       }
+  //     });
+
+  //     alert("Image added successfully.");
+      
+  //     setImage(null);
+  //     setTitulo("");
+  //     // inputFileRef.current.value = null;
+  
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!title || !imageFavourite) {
       alert("Please, Enter the title and image.");
       return;
     }
-
+     
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title: title, imageFavourite: imageFavourite }),
     };
-
+  
     try {
       const response = await fetch(
-        "http://localhost:3000/image",
+        "https://localhost:7093/Image/Post",
         requestOptions
       );
+      if (!response.ok) {
+        throw new Error("Error al agregar la imagen.");
+      }
       const data = await response.json();
+   
+      // setImages((prevImages) => {
+      //   if (Array.isArray(prevImages)) {
+      //     return [...prevImages, { id: data.id, title: title, imageFavourite: imageFavourite }];
+      //   } else {
+      //     return [{ id: data.id, title: title, imageFavourite: imageFavourite }];
+      //   }
+      // });
       setImages((prevImages) => {
-        if (Array.isArray(prevImages)) {
-          return [...prevImages, { id: data.id, title: title, imageFavourite: imageFavourite }];
-        } else {
-          // Si prevImages no es una matriz, inicializa una nueva matriz con el nuevo elemento.
-          return [{ id: data.id, title: title, imageFavourite: imageFavourite }];
-        }
+        return [...prevImages, { id: data.id, title: title, imageFavourite: imageFavourite }];
       });
-
+  
       alert("Image added successfully.");
       
       setImage(null);
       setTitulo("");
-      // inputFileRef.current.value = null;
-  
     } catch (error) {
       console.error("Error:", error);
     }
   };
+  
 
   const handleEdit = (item) => {
     setEditingItem(item);
