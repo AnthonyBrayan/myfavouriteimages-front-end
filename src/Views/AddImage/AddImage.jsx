@@ -10,7 +10,7 @@ function AddImage() {
 
   useEffect(() => {
 
-    fetch("http://localhost:3000/image")
+    fetch("https://localhost:7093/Image/Get")
       .then((response) => response.json())
       .then((data) => {
 
@@ -191,8 +191,8 @@ function AddImage() {
       <div className="card-container">
         {images && images.map((item) => (
           <div key={item.id} className="card">
-            <h1 className="card-title">{item.titulo}</h1>
-            <img className="card-image" src={item.Image} alt={item.titulo} />
+            <h1 className="card-title">{item.title}</h1>
+            <img className="card-image" src={item.imageFavourite} alt={item.title} />
             <div className="buttonEditDelete">
               <button className="edit-btn" onClick={() => handleEdit(item)}>
                 <img
