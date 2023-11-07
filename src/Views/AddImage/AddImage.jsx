@@ -28,6 +28,7 @@ function AddImage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!title || !imageFavourite) {
+      
       alert("Please, Enter the title and image.");
       return;
     }
@@ -172,6 +173,7 @@ function AddImage() {
           />
           <input
             type="file"
+            data-testid="file-upload"
             onChange={editingItem ? handleEditImageUpload : handleImageUpload}
             className="new-form-control"
           />
