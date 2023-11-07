@@ -228,7 +228,11 @@ function AddImage() {
 
   const handleEditSubmit = async (event) => {
     event.preventDefault();
-
+    
+    if (!editingItem.titulo.trim()) {
+      alert("Please, Enter the title.");
+      return;
+    }
     if (editingItem) {
       const requestOptions = {
         method: "PUT",
@@ -248,7 +252,6 @@ function AddImage() {
 
         const data = await response.json();
 
-        // Actualiza el estado de los elementos para reflejar el cambio
         setImages(images.map((item) => (item.id === data.id ? data : item)));
         alert("Image edited successfully.");
         setTitulo("");
