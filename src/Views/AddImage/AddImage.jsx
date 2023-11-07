@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../AddImage/AddImage.css";
 
 function AddImage() {
-  const [Image, setImage] = useState(null);
-  const [titulo, setTitulo] = useState("");
+  const [imageFavourite, setImage] = useState(null);
+  const [title, setTitulo] = useState("");
   const [images, setImages] = useState([]);
   // const inputFileRef = React.useRef();
   const [editingItem, setEditingItem] = useState(null);
@@ -38,7 +38,7 @@ function AddImage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!titulo || !Image) {
+    if (!title || !imageFavourite) {
       alert("Please, Enter the title and image.");
       return;
     }
@@ -46,7 +46,7 @@ function AddImage() {
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ titulo: titulo, Image: Image }),
+      body: JSON.stringify({ title: title, imageFavourite: imageFavourite }),
     };
 
     try {
@@ -57,10 +57,10 @@ function AddImage() {
       const data = await response.json();
       setImages((prevImages) => {
         if (Array.isArray(prevImages)) {
-          return [...prevImages, { id: data.id, titulo: titulo, Image: Image }];
+          return [...prevImages, { id: data.id, title: title, imageFavourite: imageFavourite }];
         } else {
           // Si prevImages no es una matriz, inicializa una nueva matriz con el nuevo elemento.
-          return [{ id: data.id, titulo: titulo, Image: Image }];
+          return [{ id: data.id, title: title, imageFavourite: imageFavourite }];
         }
       });
 
@@ -163,7 +163,7 @@ function AddImage() {
         >
           <input
             type="text"
-            value={editingItem ? editingItem.titulo : titulo}
+            value={editingItem ? editingItem.titulo : title}
             onChange={editingItem ? handleEditTitleChange : handleTitleChange}
             placeholder="Enter the title."
             className="new-form-control"
@@ -183,7 +183,7 @@ function AddImage() {
           </button>
         </form>
 
-        {editingItem ? <img src={editingItem.Image} alt="" className="new-image" /> : <img src={Image} alt="" className="new-image" style={{ display: Image ? 'block' : 'none' }} />}
+        {editingItem ? <img src={editingItem.Image} alt="" className="new-image" /> : <img src={imageFavourite} alt="" className="new-image" style={{ display: imageFavourite ? 'block' : 'none' }} />}
 
 
       </div>
