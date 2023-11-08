@@ -22,6 +22,8 @@
 - [Google Cloud] - Google's cloud computing services for web applications and more.
 - [Jest] - A JavaScript testing framework.
 - [Enzyme] - A testing utility for React.
+- [C#] - A programming language commonly used for building Windows applications and web services.
+- [Visual Studio Code] - A popular open-source code editor developed by Microsoft.
 
 
 
